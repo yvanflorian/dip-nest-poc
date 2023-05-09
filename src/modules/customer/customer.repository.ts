@@ -1,4 +1,3 @@
-import { Injectable } from "@nestjs/common"
 import { CustomerInterface } from "./customer.interface"
 import { InjectRepository } from "@nestjs/typeorm"
 import { CustomerEntity } from "./customer.entity"
@@ -22,6 +21,7 @@ export class CustomerRepository implements CustomerInterface {
   }
 
   async create(props: CustomerProps): Promise<Customer> {
-    return await this.customerRepo.save(props)
+    const customer = new Customer(props)
+    return await this.customerRepo.save(customer)
   }
 }

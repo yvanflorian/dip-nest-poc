@@ -4,10 +4,11 @@ import { AppService } from "./app.service"
 import { CustomerModule } from "./modules/customer/customer.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { CustomerEntity } from "./modules/customer/customer.entity"
+import { ConfigModule } from "@nestjs/config"
 
 @Module({
   imports: [
-    CustomerModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.POSTGRES_HOST,
@@ -19,6 +20,7 @@ import { CustomerEntity } from "./modules/customer/customer.entity"
       synchronize: true,
       logging: true,
     }),
+    CustomerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

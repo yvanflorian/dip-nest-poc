@@ -1,12 +1,10 @@
-import { Column, Entity, PrimaryColumn } from "typeorm"
+import { Column, Entity, Index, PrimaryColumn } from "typeorm"
 
 @Entity({ name: "customers" })
+@Index(["firstName", "lastName"], { unique: true })
 export class CustomerEntity {
   @PrimaryColumn()
   readonly id: string
-
-  @Column({ unique: true })
-  readonly name: string
 
   @Column()
   readonly firstName: string
